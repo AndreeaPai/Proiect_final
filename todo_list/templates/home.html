@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block content %}
+    {% if message %}
+    {% for message in message %}
+        <div class="alert alert-warning alert-dismissable" role="alert">
+            <button class="close" data-dismiss="alert">
+                <small><sup>x</sup></small>
+            </button>
+            {{message}}
+        </div>
+{% endfor %}
+
+{% endif %}
+
+{% if todo_items %}
+    <table class="table table-border">
+    {% for things in todo_items %}
+            <tr>
+                <td>
+                    {{ things.text }}
+                    <div class="float-right">
+                    <a href="{% url 'edit' things.id %}">
+                    <button type="submit" class="btn btn-sm btn-success">Editeaza</button>
+                    </a>
+                </div>
+                </td>
+                <td><center>{{ things.added_date }}</center></td>
+                <td><center>
+                    <div class="float-right">
+                        <a href="{% url 'delete' things.id %}">
+                          <button type="submit" class="btn btn-sm btn-danger">Sterge</button>
+                        </a>
+                  </div></center></td>
+            </tr>
+            {% endfor %}
+        </table>
+{% endif %}
+
+
+
+
+
+{% endblock content %}
